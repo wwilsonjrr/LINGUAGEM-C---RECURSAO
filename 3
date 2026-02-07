@@ -1,0 +1,73 @@
+/*
+===============================================================================
+EXERCÍCIO 3
+
+Escreva uma função recursiva que calcule a soma dos primeiros n cubos.
+
+A soma dos cubos é definida como:
+    S(n) = 1³ + 2³ + 3³ + ... + n³
+
+Exemplo:
+    Se n = 3 → S(3) = 1³ + 2³ + 3³ = 1 + 8 + 27 = 36
+===============================================================================
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+#include <math.h>    // Biblioteca matemática para usar pow() (potência)
+
+// -----------------------------------------------------------------------------
+// Protótipo da função recursiva que calcula a soma dos cubos
+// -----------------------------------------------------------------------------
+int somaCubos(int n);
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int N; // Declara uma variável para armazenar o valor informado pelo usuário
+
+    // Solicita ao usuário que digite um número inteiro positivo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &N); // Lê o número digitado e armazena em n
+
+    // Verifica se o valor é válido (positivo)
+    if (N > 0)
+    {
+        // Chama a função recursiva somaCubos() e armazena o resultado em "resultado"
+        int resultado = somaCubos(N);
+
+        // Exibe o resultado formatado na tela
+        printf("A soma dos cubos de 1 ate %d eh: %d\n", N, resultado);
+    }
+    else
+    {
+        // Caso o número seja inválido, exibe mensagem de erro
+        printf("Numero invalido! Digite um numero positivo.\n");
+    }
+
+    system("pause"); // Pausa o programa (para sistemas Windows)
+    return 0;        // Encerra o programa corretamente
+}
+
+// -----------------------------------------------------------------------------
+// Função recursiva somaCubos()
+// Calcula a soma dos cubos dos números de 1 até n
+// -----------------------------------------------------------------------------
+int somaCubos(int n)
+{
+    // CASO BASE:
+    // Quando n for igual a 1, o resultado é 1³ = 1
+    if (n == 1)
+    {
+        return 1; // Retorna 1 e encerra a recursão
+    }
+    else
+    {
+        // CASO RECURSIVO:
+        // somaCubos(n) = n³ + somaCubos(n - 1)
+        // A função chama a si mesma reduzindo n até chegar no caso base
+        return pow(n, 3) + somaCubos(n - 1);
+    }
+}
