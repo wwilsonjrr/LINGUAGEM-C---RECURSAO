@@ -1,0 +1,84 @@
+/*
+===============================================================================
+EXERCÍCIO 4
+
+Crie uma função recursiva que receba dois inteiros positivos k e n
+e calcule kⁿ (k elevado a n).
+
+Exemplo:
+    Se k = 2 e n = 4 → resultado = 2⁴ = 2 × 2 × 2 × 2 = 16
+
+
+
+Observação:
+    Na função recursiva o certo é como esta em baixo, a função chama ela mesma:
+    return k * potencia(k, n - 1);
+
+    Quando você usa pow, a recursão acaba, como está abaixo, está errado:
+    return k * pow(k, n - 1);
+
+===============================================================================
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+// -----------------------------------------------------------------------------
+// Protótipo da função recursiva que calcula k elevado a n
+// -----------------------------------------------------------------------------
+int potencia(int k, int n);
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int K, N; // Declara duas variáveis inteiras para armazenar os valores de base (K) e expoente (N)
+
+    // Solicita ao usuário que digite a base K
+    printf("Digite o valor da base (K): ");
+    scanf("%d", &K); // Lê o valor de K digitado pelo usuário
+
+    // Solicita ao usuário que digite o expoente N
+    printf("Digite o valor do expoente (N): ");
+    scanf("%d", &N); // Lê o valor de N digitado pelo usuário
+
+    // Verifica se ambos os valores são positivos
+    if (K >= 0 && N >= 0)
+    {
+        // Chama a função recursiva potencia() e armazena o resultado
+        int resultado = potencia(K, N);
+
+        // Exibe o resultado formatado na tela
+        printf("%d elevado a %d eh: %d\n", K, N, resultado);
+    }
+    else
+    {
+        // Caso algum valor seja negativo, exibe uma mensagem de erro
+        printf("Erro! Digite apenas numeros inteiros positivos.\n");
+    }
+
+    system("pause"); // Pausa o programa (Windows)
+    return 0;        // Retorna 0 indicando execução bem-sucedida
+}
+
+// -----------------------------------------------------------------------------
+// Função recursiva potencia()
+// Calcula kⁿ (k elevado a n) usando recursão
+// -----------------------------------------------------------------------------
+int potencia(int k, int n)
+{
+    // CASO BASE:
+    // Quando o expoente n for igual a 0, o resultado é sempre 1 (por definição matemática)
+    if (n == 0)
+    {
+        return 1; // Retorna 1 e interrompe a recursão
+    }
+    else
+    {
+        // CASO RECURSIVO:
+        // kⁿ = k × kⁿ⁻¹
+        // A função se chama novamente com o expoente diminuído em 1
+        return k * potencia(k, n - 1);
+    }
+}
