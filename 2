@@ -1,0 +1,72 @@
+/*
+===============================================================================
+EXERCÍCIO 2
+
+Faça uma função recursiva que calcule e retorne o fatorial de um número inteiro N.
+
+Definição matemática do fatorial:
+    N! = N × (N - 1) × (N - 2) × ... × 2 × 1
+
+Exemplo:
+    5! = 5 × 4 × 3 × 2 × 1 = 120
+===============================================================================
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+// -----------------------------------------------------------------------------
+// Protótipo da função recursiva que calcula o fatorial
+// -----------------------------------------------------------------------------
+int fatorial(int n);
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    int N; // Declara uma variável para armazenar o número digitado pelo usuário
+
+    // Solicita ao usuário que insira um número inteiro não negativo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &N); // Lê o valor digitado e armazena em N
+
+    // Verifica se o número é válido (positivo)
+    if (N >= 0)
+    {
+        // Chama a função recursiva fatorial() e armazena o resultado
+        int resultado = fatorial(N);
+
+        // Exibe o resultado formatado na tela
+        printf("O fatorial de %d eh: %d\n", N, resultado);
+    }
+    else
+    {
+        // Caso o usuário digite um número negativo, exibe mensagem de erro
+        printf("Numero invalido! Digite um numero inteiro nao negativo.\n");
+    }
+
+    system("pause"); // Pausa o programa (Windows)
+    return 0;        // Encerra o programa com sucesso
+}
+
+// -----------------------------------------------------------------------------
+// Função recursiva fatorial()
+// Calcula o fatorial de um número inteiro n
+// -----------------------------------------------------------------------------
+int fatorial(int n)
+{
+    // CASO BASE:
+    // Quando n for igual a 0 ou 1, o fatorial é igual a 1
+    if (n == 0 || n == 1)
+    {
+        return 1; // Retorna 1 e interrompe a recursão
+    }
+    else
+    {
+        // CASO RECURSIVO:
+        // fatorial(n) = n * fatorial(n - 1)
+        // Exemplo: fatorial(5) = 5 * fatorial(4)
+        return n * fatorial(n - 1);
+    }
+}
