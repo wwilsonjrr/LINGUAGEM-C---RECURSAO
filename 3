@@ -68,6 +68,6 @@ int somaCubos(int n)
         // CASO RECURSIVO:
         // somaCubos(n) = n³ + somaCubos(n - 1)
         // A função chama a si mesma reduzindo n até chegar no caso base
-        return pow(n, 3) + somaCubos(n - 1);
+        return pow(n, 3) + somaCubos(n - 1); // aqui eu posso usar pow, porque a recursão NÃO está no cálculo do cubo, e sim na soma.
     }
 }
