@@ -1,0 +1,68 @@
+/*
+===============================================================================
+EXERCÍCIO 1
+
+Crie uma função recursiva que receba um número inteiro positivo N e calcule
+o somatório dos números de 1 até N.
+
+Exemplo:
+Se N = 5, então o resultado é 1 + 2 + 3 + 4 + 5 = 15
+===============================================================================
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>  // Biblioteca padrão (para system("pause"))
+
+// -----------------------------------------------------------------------------
+// Protótipo da função recursiva que calcula o somatório de 1 até N
+// -----------------------------------------------------------------------------
+int somatorio(int n);
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    int N;  // Declara uma variável inteira para armazenar o número fornecido pelo usuário
+
+    // Solicita ao usuário que digite um número inteiro positivo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &N); // Lê o número e armazena na variável N
+
+    // Verifica se o número é positivo antes de chamar a função recursiva
+    if (N > 0)
+    {
+        // Chama a função recursiva e armazena o resultado
+        int resultado = somatorio(N);
+
+        // Exibe o resultado na tela
+        printf("O somatorio de 1 ate %d eh: %d\n", N, resultado);
+    }
+    else
+    {
+        // Caso o número não seja positivo, mostra uma mensagem de erro
+        printf("Por favor, digite um numero positivo!\n");
+    }
+
+    system("pause"); // Pausa o programa (Windows)
+    return 0;        // Retorna 0 indicando que o programa terminou corretamente
+}
+
+// -----------------------------------------------------------------------------
+// Função recursiva somatorio()
+// Calcula o somatório dos números de 1 até N usando recursão
+// -----------------------------------------------------------------------------
+int somatorio(int n)
+{
+    // Caso base: quando n for igual a 1, a soma é apenas 1
+    if (n == 1)
+    {
+        return 1; // Retorna 1 e encerra a recursão
+    }
+    else
+    {
+        // Caso recursivo: soma o número atual com o resultado da chamada anterior
+        // Exemplo: somatorio(5) = 5 + somatorio(4)
+        return n + somatorio(n - 1);
+    }
+}
