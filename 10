@@ -1,0 +1,56 @@
+/*
+10. Faça uma função recursiva que receba um número inteiro positivo par N
+    e imprima todos os números pares de 0 até N em ordem decrescente.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+//Protótipo da função recursiva
+void imprimeParesDecrescente(int n);
+
+//Função principal (main)
+int main()
+{
+    int N;  // Variável para armazenar o número digitado
+
+    // Solicita que o usuário digite um número inteiro positivo e par
+    printf("Digite um numero inteiro positivo e par: ");
+    scanf("%d", &N);  // Lê o valor digitado e armazena em N
+
+    // Verifica se o número é válido (positivo e par)
+    if (N < 0 || N % 2 != 0)
+    {
+        printf("Por favor, digite um numero positivo e par.\n");
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Exibe mensagem antes da impressão
+    printf("Numeros pares de %d ate 0 em ordem decrescente:\n", N);
+
+    // Chama a função recursiva
+    imprimeParesDecrescente(N);
+
+    printf("\n");  // Pula uma linha após a impressão
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que imprime os números pares de N até 0 em ordem decrescente
+void imprimeParesDecrescente(int n)
+{
+    // Caso base: quando n for igual a 0, imprime 0 e encerra a recursão
+    if (n == 0)
+    {
+        printf("%d ", 0);  // Imprime o último número (menor par)
+        return;            // Encerra a função
+    }
+
+    // Primeiro imprime o valor atual de n
+    printf("%d ", n);
+
+    // Chamada recursiva: imprime o próximo número par menor
+    imprimeParesDecrescente(n - 2);
+}
