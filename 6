@@ -1,0 +1,46 @@
+/*
+6. A multiplicação de dois números inteiros pode ser feita através de somas sucessivas.
+   Proponha um algoritmo recursivo Multip_Rec(n1, n2) que calcule a multiplicação de dois inteiros.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Função recursiva que realiza a multiplicação de dois inteiros usando apenas somas sucessivas
+int Multip_Rec(int n1, int n2)
+{
+    // Caso base: quando n2 é igual a 0, o resultado da multiplicação é 0
+    if (n2 == 0)
+        return 0; // A recursão termina aqui
+
+    // Caso especial: se n2 for negativo, chamamos novamente a função invertendo o sinal
+    if (n2 < 0)
+        return -Multip_Rec(n1, -n2); // Corrige o sinal para permitir multiplicação com número negativo
+                                     // esse código não torna n1 negativo. Ele só mexe no sinal de n2 e
+                                     // depois corrige o sinal do resultado final.
+
+    // Caso recursivo: somamos n1 ao resultado da multiplicação de n1 por (n2 - 1)
+    return n1 + Multip_Rec(n1, n2 - 1); // Reduz n2 a cada chamada até chegar em 0
+}
+
+int main()
+{
+    int a, b; // Declara duas variáveis inteiras para armazenar os números digitados
+
+    // Solicita que o usuário digite o primeiro número
+    printf("Digite o primeiro numero: ");
+    scanf("%d", &a); // Lê o valor digitado e armazena em 'a'
+
+    // Solicita que o usuário digite o segundo número
+    printf("Digite o segundo numero: ");
+    scanf("%d", &b); // Lê o valor digitado e armazena em 'b'
+
+    // Chama a função recursiva Multip_Rec e armazena o resultado na variável 'resultado'
+    int resultado = Multip_Rec(a, b);
+
+    // Exibe o resultado final da multiplicação
+    printf("O resultado da multiplicacao eh: %d\n", resultado);
+
+    system("pause");
+    return 0; // Finaliza o programa com sucesso
+}
