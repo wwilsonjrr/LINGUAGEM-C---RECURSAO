@@ -1,0 +1,68 @@
+/*
+12. Crie um programa que contenha uma função recursiva
+    para encontrar o menor elemento em um vetor.
+
+    Importante:
+
+    tamanho - 1 é o índice do último elemento
+    Não existe i como parâmetro
+    Funções recursivas não têm laço, logo não têm índice de controle (i)
+
+
+    Em recursão, você não inicializa variáveis
+    Você confia no retorno da chamada menor
+
+    O primeiro valor aparece na função recursiva:
+
+    if(tamanho == 1)
+        return vetor[0];
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+
+// Protótipo da função recursiva
+int menorElemento(int vetor[], int tamanho);
+
+// Função principal (main)
+int main()
+{
+    int vetor[5];  // Declara um vetor com 5 posições inteiras
+    int i;         // Variável auxiliar para o laço de leitura
+
+    // Solicita que o usuário digite os 5 elementos do vetor
+    printf("Digite 5 numeros inteiros:\n");
+    for (i = 0; i < 5; i++)  // Laço de repetição que percorre o vetor
+    {
+        printf("Elemento %d: ", i + 1);  // Exibe o número do elemento a ser digitado
+        scanf("%d", &vetor[i]);          // Lê o valor digitado e armazena no vetor
+    }
+
+    // Chama a função recursiva e armazena o resultado em uma variável
+    int menor = menorElemento(vetor, 5);
+
+    // Exibe o menor elemento encontrado
+    printf("\nO menor elemento do vetor eh: %d\n", menor);
+
+    system("pause");
+    return 0;  // Encerra o programa com sucesso
+}
+
+// Função recursiva que encontra o menor elemento de um vetor
+int menorElemento(int vetor[], int tamanho)
+{
+    // Caso base: se o vetor tiver apenas um elemento, ele é o menor
+    if (tamanho == 1)
+        return vetor[0];  // Retorna o único elemento existente
+
+    // Chamada recursiva: encontra o menor elemento do restante do vetor (tamanho - 1)
+    int menorRestante = menorElemento(vetor, tamanho - 1); // tamanho - 1 é o índice do último elemento
+
+    // Compara o último elemento do vetor com o menor encontrado até agora
+    if (vetor[tamanho - 1] < menorRestante)
+        return vetor[tamanho - 1];  // Retorna o último elemento se ele for menor
+    else
+        return menorRestante;       // Caso contrário, mantém o menor anterior
+}
