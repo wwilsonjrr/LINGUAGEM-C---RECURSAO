@@ -1,0 +1,63 @@
+/*
+18. Faça uma função recursiva que receba um número inteiro positivo N
+    e retorne o super-fatorial desse número.
+    O super-fatorial de um número N é definido pelo produto dos N primeiros fatoriais de N.
+    Assim, o super-fatorial de 4 é:
+
+    sf(4) = 1! * 2! * 3! * 4! = 288
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Protótipo das funções
+long long int fatorial(int N);
+long long int superFatorial(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Declara a variável para armazenar o número digitado pelo usuário
+
+    // Solicita que o usuário digite um número inteiro positivo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &n);  // Lê o valor digitado e armazena em n
+
+    // Verifica se o número é válido (positivo)
+    if (n <= 0)
+    {
+        printf("O numero deve ser maior que zero.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função recursiva superFatorial e armazena o resultado
+    long long int resultado = superFatorial(n);
+
+    // Exibe o resultado final na tela
+    printf("\nO super-fatorial de %d eh: %lld\n", n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o fatorial de um número
+long long int fatorial(int N)
+{
+    // Caso base: se n for 0 ou 1, o fatorial é 1
+    if (N == 0 || N == 1)
+        return 1;  // Retorna 1 e encerra a recursão
+
+    // Caso recursivo: multiplica n pelo fatorial de (n - 1)
+    return N * fatorial(N - 1);
+}
+
+// Função recursiva que calcula o super-fatorial de N
+long long int superFatorial(int N)
+{
+    // Caso base: se n for 1, o super-fatorial é 1! = 1
+    if (N == 1)
+        return 1;  // Retorna 1 e encerra a recursão
+
+    // Caso recursivo: multiplica o fatorial atual pelo super-fatorial do número anterior
+    return fatorial(N) * superFatorial(N - 1);
+}
