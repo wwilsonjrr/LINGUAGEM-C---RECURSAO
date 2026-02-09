@@ -1,0 +1,65 @@
+/*
+15. Faça uma função recursiva que calcule o valor da série S descrita a seguir
+    para um valor n > 0 a ser fornecido como parâmetro para a mesma.
+
+    S = 2 + 5/2 + 10/3 + ... + (1 + n²) / n
+
+
+    Neste exercício, a regra do printf NÃO SE APLICA
+
+    Por quê?
+
+    Porque essa função NÃO imprime nada.
+    Ela calcula e retorna um valor.
+
+    A regra:
+
+    “printf antes ou depois da recursão”
+
+    só faz sentido quando existe printf dentro da função recursiva.
+
+    Aqui não existe.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Protótipo da função recursiva
+double SomaSerie(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Variável que armazenará o valor de n digitado pelo usuário
+
+    // Solicita que o usuário digite o valor de n
+    printf("Digite o valor de n (n > 0): ");
+    scanf("%d", &n);  // Lê o valor e armazena em n
+
+    // Verifica se o valor de n é válido
+    if (n <= 0)
+    {
+        printf("O valor de n deve ser maior que zero.\n");  // Exibe mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função recursiva e armazena o resultado em S
+    double S = SomaSerie(n);
+
+    // Exibe o valor final da série com duas casas decimais
+    printf("\nO valor da serie S para n = %d eh: %.2lf\n", n, S);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o valor da série S até o termo n
+double SomaSerie(int N)
+{
+    // Caso base: quando n for igual a 1, retorna o primeiro termo da série (2/1 = 2)
+    if (N == 1)
+        return 2.0;  // Retorna o valor do primeiro termo
+
+    // Caso recursivo: soma o termo atual (1 + n²)/n com o resultado da série anterior
+    return ((1.0 + N * N) / N) + SomaSerie(N - 1);
+}
