@@ -1,0 +1,75 @@
+/*
+17. Faça uma função recursiva que receba um número inteiro positivo N
+    e retorne o fatorial quádruplo desse número.
+    O fatorial quádruplo de um número N é dado por:
+
+               (2n)!
+    FQ(N) =  ---------
+               n!
+
+
+    // Exemplo:   fatorial(5)
+    //            = 5 * fatorial(4)
+    //            = 5 * 4 * fatorial(3)
+    //            = 5 * 4 * 3 * fatorial(2)
+    //            = 5 * 4 * 3 * 2 * fatorial(1)
+    //            = 5 * 4 * 3 * 2 * 1
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Protótipo das funções
+long long int fatorial(int N);
+long long int fatorialQuadruplo(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Declara a variável que armazenará o número digitado pelo usuário
+
+    // Solicita que o usuário digite um número inteiro positivo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &n);  // Lê o valor digitado e armazena em n
+
+    // Verifica se o número é válido
+    if (n <= 0)
+    {
+        printf("O numero deve ser maior que zero.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função fatorialQuadruplo e armazena o resultado
+    long long int resultado = fatorialQuadruplo(n);
+
+    // Exibe o resultado final
+    printf("\nO fatorial quadruplo de %d eh: %lld\n", n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o fatorial de um número
+long long int fatorial(int N)
+{
+    // Caso base: quando n for 0 ou 1, o fatorial é 1
+    if (N == 0 || N == 1)
+        return 1;  // Encerra a recursão retornando 1
+
+    // Caso recursivo: multiplica n pelo fatorial de (n - 1)
+    return N * fatorial(N - 1);
+}
+
+// Função que calcula o fatorial quádruplo usando a função recursiva fatorial()
+long long int fatorialQuadruplo(int N)
+{
+    // Calcula o numerador (2n)!
+    long long int numerador = fatorial(2 * N);
+
+    // Calcula o denominador n!
+    long long int denominador = fatorial(N);
+
+    // Retorna o resultado da divisão (2n)! / n!
+    return numerador / denominador;
+}
