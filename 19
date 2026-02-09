@@ -1,0 +1,69 @@
+/*
+19. Faça uma função recursiva que receba um número inteiro positivo N
+    e retorne o hiperfatorial desse número.
+    O hiperfatorial de um número N, escrito H(n), é definido por:
+
+          n
+    H(n) = ∏ k^k  =  1^1 * 2^2 * 3^3 * ... * (n-1)^(n-1) * n^n
+          k=1
+
+
+    break
+
+    Só funciona dentro de estruturas de repetição ou seleção:
+
+    for
+
+    while
+
+    do while
+
+    switch
+
+    Ele quebra o laço, não encerra o programa.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+#include <math.h>    // Biblioteca matemática (para usar pow)
+
+
+// Protótipo da função recursiva
+long double hiperFatorial(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Declara a variável para armazenar o número digitado pelo usuário
+
+    // Solicita ao usuário que digite um número inteiro positivo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &n);  // Lê o valor digitado e armazena em n
+
+    // Verifica se o número é válido (positivo)
+    if (n <= 0)
+    {
+        printf("O numero deve ser maior que zero.\n");  // Exibe mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função recursiva hiperFatorial e armazena o resultado
+    long double resultado = hiperFatorial(n);
+
+    // Exibe o resultado final na tela
+    printf("\nO hiperfatorial de %d eh: %.0Lf\n", n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o hiperfatorial de um número N
+long double hiperFatorial(int N)
+{
+    // Caso base: se n for 1, o hiperfatorial é 1^1 = 1
+    if (N == 0 || N == 1)
+        return 1.0;  // Retorna 1 e encerra a recursão
+
+    // Caso recursivo: multiplica n elevado a n pelo hiperfatorial do número anterior
+    return pow(N, N) * hiperFatorial(N - 1);
+}
