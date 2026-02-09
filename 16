@@ -1,0 +1,58 @@
+/*
+16. Faça uma função recursiva que receba um número inteiro positivo ímpar N
+    e retorne o fatorial duplo desse número.
+    O fatorial duplo é definido como o produto de todos os números naturais ímpares
+    de 1 até algum número natural ímpar N.
+
+    Exemplo: 5!! = 1 * 3 * 5 = 15
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+// Protótipo da função
+int FatorialDuplo(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Declara a variável que armazenará o número digitado pelo usuário
+
+    // Solicita que o usuário digite um número inteiro positivo e ímpar
+    printf("Digite um numero inteiro positivo e impar: ");
+    scanf("%d", &n);  // Lê o valor digitado e armazena em n
+
+    // Verifica se o número é válido (positivo e ímpar)
+    if (n <= 0 || n % 2 == 0)
+    {
+        printf("O numero deve ser positivo e impar.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função recursiva e armazena o resultado em resultado
+    int resultado = FatorialDuplo(n);
+
+    // Exibe o resultado final do cálculo
+    printf("\nO fatorial duplo de %d eh: %d\n", n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o fatorial duplo de um número ímpar N
+// Multiplica apenas números ímpares, porque começa ímpar, anda de 2 em 2, termina em 1
+// FatorialDuplo(7)
+// = 7 * FatorialDuplo(5)
+// = 7 * 5 * FatorialDuplo(3)
+// = 7 * 5 * 3 * FatorialDuplo(1)
+// = 7 * 5 * 3 * 1
+int FatorialDuplo(int N)
+{
+    // Caso base: quando n for igual a 1, o fatorial duplo é 1
+    if (N == 1)
+        return 1;  // Encerra a recursão retornando 1
+
+    // Caso recursivo: multiplica o número atual pelo fatorial duplo do número anterior ímpar
+    return N * FatorialDuplo(N - 2);
+}
