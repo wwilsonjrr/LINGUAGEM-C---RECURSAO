@@ -1,0 +1,76 @@
+/*
+13. Escreva uma função recursiva SomaSerie(i, j, k).
+    Esta função devolve a soma da série de valores do intervalo [i, j],
+    com incremento k.
+
+
+    O que o exercício está pedindo, em palavras simples
+
+    A função SomaSerie(i, j, k) deve somar uma sequência de números que:
+
+    começa em i
+
+    vai até j
+
+    andando de k em k
+
+    Ou seja, a série é:
+
+    i, i + k, i + 2k, i + 3k, ..., até não passar de j
+
+
+
+    Exemplo prático
+
+    i = 2
+    j = 10
+    k = 2
+
+    2 + 4 + 6 + 8 + 10 = 30
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Protótipo da Função Recursiva
+int SomaSerie(int I, int J, int K);
+
+// Função principal (main)
+int main()
+{
+    int i, j, k;  // Declara as variáveis que definem o intervalo e o incremento
+
+    // Solicita ao usuário que digite o valor inicial do intervalo
+    printf("Digite o valor inicial (i): ");
+    scanf("%d", &i);  // Lê o valor inicial e armazena em i
+
+    // Solicita ao usuário que digite o valor final do intervalo
+    printf("Digite o valor final (j): ");
+    scanf("%d", &j);  // Lê o valor final e armazena em j
+
+    // Solicita ao usuário que digite o incremento
+    printf("Digite o incremento (k): ");
+    scanf("%d", &k);  // Lê o incremento e armazena em k
+
+    // Chama a função recursiva e armazena o resultado na variável soma
+    int soma = SomaSerie(i, j, k);
+
+    // Exibe o resultado final da soma da série
+    printf("\nA soma da serie de %d ate %d com incremento %d eh: %d\n", i, j, k, soma);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula a soma da série de valores de i até j com incremento k
+int SomaSerie(int I, int J, int K)
+{
+    // Caso base: quando o valor inicial ultrapassa o final, retorna 0 e encerra a recursão
+    if (I > J)
+        return 0;  // Nenhum valor a somar
+
+    // Caso recursivo: soma o valor atual (i) e chama a função novamente com i aumentado de k
+    // Some o valor atual (i) com a soma de todos os próximos valores da série.
+    return I + SomaSerie(I + K, J, K); //
+}
