@@ -1,0 +1,76 @@
+/*
+14. Escreva uma função recursiva ImprimeSerie(i, j, k).
+    Esta função imprime na tela a série de valores do intervalo [i, j],
+    com incremento k.
+
+
+    Regra definitiva (vale pra C)
+
+    1️ - Se o valor DIMINUI na recursão (n - 1)
+
+          printf	               Ordem
+           antes	          decrescente
+          depois	            crescente
+
+    2️ - Se o valor AUMENTA na recursão (i + k)
+
+          printf	               Ordem
+           antes	            crescente
+          depois	          decrescente
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Protótipo da função recursiva
+void ImprimeSerie(int I, int J, int K);
+
+// Função Principal (main)
+int main()
+{
+    int i, j, k;  // Declara as variáveis que definem o intervalo e o incremento
+
+    // Solicita ao usuário o valor inicial do intervalo
+    printf("Digite o valor inicial (i): ");
+    scanf("%d", &i);  // Lê o valor inicial e armazena em i
+
+    // Solicita ao usuário o valor final do intervalo
+    printf("Digite o valor final (j): ");
+    scanf("%d", &j);  // Lê o valor final e armazena em j
+
+    // Solicita ao usuário o incremento
+    printf("Digite o incremento (k): ");
+    scanf("%d", &k);  // Lê o valor do incremento e armazena em k
+
+    // Verifica se o incremento é válido (não pode ser zero)
+    if (k <= 0)
+    {
+        printf("O incremento deve ser maior que zero.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se o incremento for inválido
+    }
+
+    // Exibe mensagem informando o intervalo e o incremento
+    printf("\nSerie de %d ate %d com incremento %d:\n", i, j, k);
+
+    // Chama a função recursiva para imprimir a série
+    ImprimeSerie(i, j, k);
+
+    printf("\n");  // Pula uma linha após imprimir a série
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que imprime os valores de i até j com incremento k
+void ImprimeSerie(int I, int J, int K)
+{
+    // Caso base: se o valor inicial ultrapassar o final, a função termina
+    if (I > J)
+        return;  // Encerra a recursão
+
+    // Imprime o valor atual
+    printf("%d ", I);
+
+    // Chamada recursiva para o próximo valor da série
+    ImprimeSerie(I + K, J, K);
+}
