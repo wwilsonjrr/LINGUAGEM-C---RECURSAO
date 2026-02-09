@@ -1,0 +1,53 @@
+/*
+11. Escreva uma função recursiva que exibe todos os elementos
+    em um array de inteiros, separados por espaço.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+void exibeArray(int vetor[], int tamanho, int indice);
+
+// Função principal (main)
+int main()
+{
+    int vetor[5];  // Declara um array de inteiros com 5 posições
+    int i;         // Variável auxiliar para leitura dos valores
+
+    // Solicita ao usuário que digite os elementos do vetor
+    printf("Digite 5 numeros inteiros:\n");
+    for (i = 0; i < 5; i++)
+    {
+        printf("Elemento %d: ", i + 1);
+        scanf("%d", &vetor[i]);  // Lê cada valor e armazena no vetor
+    }
+
+    // Exibe mensagem antes da impressão
+    printf("\nElementos do vetor: ");
+
+    // Chama a função recursiva iniciando no índice 0
+    exibeArray(vetor, 5, 0);
+
+    printf("\n");  // Pula uma linha após a impressão
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que imprime os elementos de um array
+void exibeArray(int vetor[], int tamanho, int indice)
+{
+    // Caso base: quando o índice for igual ao tamanho, a recursão termina
+    if (indice == tamanho)
+    {
+        return;  // Encerra a função
+    }
+
+    // Imprime o elemento atual do vetor
+    printf("%d ", vetor[indice]);
+
+    // Chamada recursiva para o próximo elemento
+    exibeArray(vetor, tamanho, indice + 1);
+}
