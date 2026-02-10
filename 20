@@ -1,0 +1,63 @@
+/*
+20. Faça uma função recursiva que receba um número inteiro positivo N
+    e retorne o fatorial exponencial desse número.
+
+    Um fatorial exponencial é um inteiro positivo N elevado à potência de (N - 1),
+    que por sua vez é elevado à potência de (N - 2), e assim por diante.
+    Ou seja:
+
+        Fatorial Exponencial = n^(n-1)^(n-2)^...^1
+
+
+        fatorialExponencial(4)
+        = pow(4, fatorialExponencial(3))
+        = pow(4, pow(3, fatorialExponencial(2)))
+        = pow(4, pow(3, pow(2, fatorialExponencial(1))))
+        = pow(4, pow(3, pow(2, 1)))
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+#include <math.h>    // Biblioteca matemática (para usar pow)
+
+
+// Protótipo da função recursiva
+long double fatorialExponencial(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Declara a variável que armazenará o número digitado pelo usuário
+
+    // Solicita que o usuário digite um número inteiro positivo
+    printf("Digite um numero inteiro positivo: ");
+    scanf("%d", &n);  // Lê o valor digitado e armazena em n
+
+    // Verifica se o número é válido (positivo)
+    if (n <= 0)
+    {
+        printf("O numero deve ser maior que zero.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função recursiva e armazena o resultado
+    long double resultado = fatorialExponencial(n);
+
+    // Exibe o resultado final (usando notação científica, pois os valores crescem muito rápido)
+    printf("\nO fatorial exponencial de %d eh: %.0Lf\n", n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o fatorial exponencial
+long double fatorialExponencial(int N)
+{
+    // Caso base: quando n for igual a 1, o resultado é 1
+    if (N == 0 || N == 1)
+        return 1.0;  // Retorna 1 e encerra a recursão
+
+    // Caso recursivo: eleva n ao resultado do fatorial exponencial de (n - 1)
+    return pow(N, fatorialExponencial(N - 1));
+}
