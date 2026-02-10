@@ -1,79 +1,64 @@
 /*
-22. Uma sequência de Fibonacci generalizada, de f0 a f1, é definida como:
-
-    fibg(f0, f1, 0) = f0
-    fibg(f0, f1, 1) = f1
-    fibg(f0, f1, n) = fibg(f0, f1, n - 1) + fibg(f0, f1, n - 2), se n > 1.
-
-    Assim, fibg(f0, f1, 0), fibg(f0, f1, 1), fibg(f0, f1, 2), ...
-    formam uma sequência de Fibonacci a partir de dois valores iniciais fornecidos.
+23. Faça uma função recursiva que permita somar os elementos de um vetor de inteiros.
 
 
-    O que é fibg(f0, f1, n)?
+    Se o vetor for:
 
-    Pense em fibg assim:
+    [2, 4, 6, 8, 10]
 
-    fibg(f0, f1, n) = “qual é o termo de índice n de uma sequência de Fibonacci que começa com f0 e f1?”
 
-    Ou seja:
+    A função faz:
 
-    f0 → primeiro valor da sequência (posição 0)
+    somaVetor(v, 5)
+    = 10 + somaVetor(v, 4)
+    = 10 + 8 + somaVetor(v, 3)
+    = 10 + 8 + 6 + somaVetor(v, 2)
+    = 10 + 8 + 6 + 4 + somaVetor(v, 1)
+    = 10 + 8 + 6 + 4 + 2
 
-    f1 → segundo valor da sequência (posição 1)
-
-    n → qual posição da sequência você quer calcular
 */
 
 #include <stdio.h>   // Biblioteca padrão de entrada e saída
 #include <stdlib.h>
 
-// Protótipo da função recursiva
-int fibg(int F0, int F1, int N);
-
-// Função principal (main)
-int main()
+// -----------------------------------------------------------------------------
+// Função recursiva que soma os elementos de um vetor (VERSÃO DIDÁTICA)
+// Caso base: vetor com apenas um elemento
+// -----------------------------------------------------------------------------
+int somaVetor(int vetor[], int tamanho)
 {
-    int f0, f1, n;  // Declara as variáveis para armazenar os valores iniciais e o termo desejado
+    // Caso base: se o vetor tiver apenas um elemento,
+    // esse elemento é a própria soma
+    if (tamanho == 1)
+        return vetor[0];
 
-    // Solicita que o usuário digite os dois primeiros termos da sequência
-    printf("Digite o primeiro termo (f0): ");
-    scanf("%d", &f0);  // Lê e armazena o valor de f0
-
-    printf("Digite o segundo termo (f1): ");
-    scanf("%d", &f1);  // Lê e armazena o valor de f1
-
-    // Solicita que o usuário digite o índice do termo desejado
-    printf("Digite o valor de n (indice do termo desejado): ");
-    scanf("%d", &n);  // Lê e armazena o valor de n
-
-    // Verifica se n é válido (não negativo)
-    if (n < 0)
-    {
-        printf("O valor de n deve ser maior ou igual a zero.\n");  // Mensagem de erro
-        return 0;  // Encerra o programa se o valor for inválido
-    }
-
-    // Chama a função recursiva e armazena o resultado
-    int resultado = fibg(f0, f1, n);
-
-    // Exibe o resultado final
-    printf("\nO termo fibg(%d, %d, %d) eh: %d\n", f0, f1, n, resultado);
-
-    system("pause");
-    return 0;  // Indica que o programa terminou corretamente
+    // Caso recursivo:
+    // soma o último elemento com a soma dos anteriores
+    return vetor[tamanho - 1] + somaVetor(vetor, tamanho - 1);
 }
 
-// Função recursiva que calcula o n-ésimo termo da sequência de Fibonacci generalizada
-int fibg(int F0, int F1, int N)
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
 {
-    // Caso base 1: se n for 0, retorna o primeiro termo f0
-    if (N == 0)
-        return F0;  // Retorna o valor inicial f0
+    int vetor[5];  // Declara um vetor com 5 posições
+    int i;         // Variável auxiliar para leitura dos valores
 
-    // Caso base 2: se n for 1, retorna o segundo termo f1
-    if (N == 1)
-        return F1;  // Retorna o valor inicial f1
+    // Solicita que o usuário digite os 5 elementos do vetor
+    printf("Digite 5 numeros inteiros:\n");
+    for (i = 0; i < 5; i++)
+    {
+        printf("Elemento %d: ", i + 1);
+        scanf("%d", &vetor[i]);
+    }
 
-    // Caso recursivo: soma os dois termos anteriores da sequência
-    return fibg(F0, F1, N - 1) + fibg(F0, F1, N - 2);
+    // Chama a função recursiva para somar todos os elementos
+    int soma = somaVetor(vetor, 5);
+
+    // Exibe o resultado final
+    printf("\nA soma dos elementos do vetor eh: %d\n", soma);
+
+    system("pause");
+    return 0;
 }
