@@ -1,0 +1,59 @@
+/*
+28. Faça uma função recursiva para computar a função de Ackermann.
+    A função de Ackermann é definida recursivamente nos números não negativos como segue:
+
+    A(m, n) = n + 1                se m = 0
+    A(m, n) = A(m - 1, 1)          se m > 0 e n = 0
+    A(m, n) = A(m - 1, A(m, n - 1)) se m > 0 e n > 0
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+int ackermann(int M, int N);
+
+// Função principal (main)
+int main()
+{
+    int m, n;  // Declara as variáveis para armazenar os valores de m e n
+
+    // Solicita que o usuário digite os valores de m e n
+    printf("Digite o valor de m (inteiro nao negativo): ");
+    scanf("%d", &m);  // Lê o valor de m
+
+    printf("Digite o valor de n (inteiro nao negativo): ");
+    scanf("%d", &n);  // Lê o valor de n
+
+    // Verifica se os valores são válidos (não negativos)
+    if (m < 0 || n < 0)
+    {
+        printf("Os valores devem ser inteiros nao negativos.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se os valores forem inválidos
+    }
+
+    // Chama a função de Ackermann e armazena o resultado
+    int resultado = ackermann(m, n);
+
+    // Exibe o resultado final
+    printf("\nA(%d, %d) = %d\n", m, n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que implementa a função de Ackermann
+int ackermann(int M, int N)
+{
+    // Caso base 1: se m for 0, retorna n + 1
+    if (M == 0)
+        return N + 1;
+
+    // Caso base 2: se m > 0 e n for 0, aplica a segunda regra
+    if (M > 0 && N == 0)
+        return ackermann(M - 1, 1);
+
+    // Caso recursivo: se m > 0 e n > 0, aplica a terceira regra
+    return ackermann(M - 1, ackermann(M, N - 1));
+}
