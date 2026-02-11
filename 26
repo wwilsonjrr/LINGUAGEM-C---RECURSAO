@@ -1,0 +1,67 @@
+/*
+26. Faça uma função recursiva que receba um número N e retorne o N-ésimo termo
+    da sequência de Padovan.
+
+    A sequência de Padovan é uma sequência de números naturais P(n) definida pelos valores iniciais:
+    P(0) = 1
+    P(1) = 1
+    P(2) = 1
+
+    E pela relação recursiva:
+    P(n) = P(n - 2) + P(n - 3), se n > 2
+
+    Alguns valores da sequência são:
+    1, 1, 1, 2, 2, 3, 4, 5, 7, 9, 12, 16, 21, 28 ...
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+int padovan(int N);
+
+// Função principal (main)
+int main()
+{
+    int n;  // Variável para armazenar o valor digitado pelo usuário
+
+    // Solicita que o usuário digite o valor de n
+    printf("Digite o valor de n (n >= 0): ");
+    scanf("%d", &n);  // Lê o valor e armazena em n
+
+    // Verifica se o valor de n é válido
+    if (n < 0)
+    {
+        printf("O valor de n deve ser maior ou igual a zero.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se o valor for inválido
+    }
+
+    // Chama a função recursiva padovan e armazena o resultado
+    int resultado = padovan(n);
+
+    // Exibe o resultado final
+    printf("\nO termo P(%d) da sequencia de Padovan eh: %d\n", n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o N-ésimo termo da sequência de Padovan
+int padovan(int N)
+{
+    // Caso base 1: se n for 0, retorna 1
+    if (N == 0)
+        return 1;
+
+    // Caso base 2: se n for 1, retorna 1
+    if (N == 1)
+        return 1;
+
+    // Caso base 3: se n for 2, retorna 1
+    if (N == 2)
+        return 1;
+
+    // Caso recursivo: aplica a relação P(n) = P(n - 2) + P(n - 3)
+    return padovan(N - 2) + padovan(N - 3);
+}
