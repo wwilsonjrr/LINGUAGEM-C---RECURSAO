@@ -1,0 +1,47 @@
+/*
+29. Faça uma função recursiva para calcular os números de Pell.
+    Os números de Pell são definidos pela seguinte recursão:
+
+    p(n) = 0 se n = 0
+    p(n) = 1 se n = 1
+    p(n) = 2*p(n - 1) + p(n - 2) se n > 1
+*/
+#include <stdio.h> // Inclui a biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+int pell(int N);
+
+// Função principal (main)
+int main()
+{
+    int n; // Declara a variável n para armazenar o valor digitado pelo usuário
+
+    printf("Digite o valor de n (n >= 0): "); // Solicita que o usuário insira o valor de n
+    scanf("%d", &n); // Lê o valor de n digitado e o armazena na variável n
+
+    if (n < 0) // Verifica se o valor de n é negativo
+    {
+        printf("O valor de n deve ser maior ou igual a zero.\n"); // Exibe mensagem de erro se n for negativo
+        return 0; // Encerra o programa, pois o valor é inválido
+    }
+
+    int resultado = pell(n); // Chama a função recursiva e armazena o resultado na variável resultado
+    printf("\nO termo p(%d) da sequencia de Pell eh: %d\n", n, resultado); // Exibe o resultado formatado na tela
+
+    system("pause");
+    return 0; // Encerra o programa com sucesso
+}
+
+// Função recursiva que calcula o n-ésimo número de Pell
+int pell(int N)
+{
+    if (N == 0) // Verifica se n é igual a 0 (caso base 1)
+        return 0; // Retorna 0, pois p(0) = 0
+
+    if (N == 1) // Verifica se n é igual a 1 (caso base 2)
+        return 1; // Retorna 1, pois p(1) = 1
+
+    return 2 * pell(N - 1) + pell(N - 2); // Caso recursivo: calcula p(n) = 2*p(n-1) + p(n-2)
+}
