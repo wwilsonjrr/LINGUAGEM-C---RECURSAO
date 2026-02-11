@@ -1,0 +1,57 @@
+/*
+27. Implemente a função h definida recursivamente por:
+
+    h(m, n) = m + 1, se n = 1
+    h(m, n) = n + 1, se m = 1
+    h(m, n) = h(m, n - 1) + h(m - 1, n), se m > 1 e n > 1
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// Protótipo da função recursiva
+int h(int M, int N);
+
+// Função principal (main)
+int main()
+{
+    int m, n;  // Declara as variáveis para armazenar os valores de m e n
+
+    // Solicita que o usuário digite os valores de m e n
+    printf("Digite o valor de m: ");
+    scanf("%d", &m);  // Lê o valor de m
+
+    printf("Digite o valor de n: ");
+    scanf("%d", &n);  // Lê o valor de n
+
+    // Verifica se os valores são válidos (maiores que zero)
+    if (m <= 0 || n <= 0)
+    {
+        printf("Os valores de m e n devem ser maiores que zero.\n");  // Mensagem de erro
+        return 0;  // Encerra o programa se os valores forem inválidos
+    }
+
+    // Chama a função recursiva e armazena o resultado
+    int resultado = h(m, n);
+
+    // Exibe o resultado final
+    printf("\nO valor de h(%d, %d) eh: %d\n", m, n, resultado);
+
+    system("pause");
+    return 0;  // Indica que o programa terminou corretamente
+}
+
+// Função recursiva que calcula o valor de h(m, n)
+int h(int M, int N)
+{
+    // Caso base 1: se n for igual a 1, retorna m + 1
+    if (N == 1)
+        return M + 1;
+
+    // Caso base 2: se m for igual a 1, retorna n + 1
+    if (M == 1)
+        return N + 1;
+
+    // Caso recursivo: aplica a fórmula h(m, n) = h(m, n - 1) + h(m - 1, n)
+    return h(M, N - 1) + h(M - 1, N);
+}
