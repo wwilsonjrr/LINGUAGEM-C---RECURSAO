@@ -1,0 +1,56 @@
+/*
+32. Dado um número n na base decimal, escreva uma função recursiva
+    que converte este número para binário.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// Protótipo da função
+void decimalParaBinario(int N);
+
+// Função principal (main)
+int main()
+{
+    int n; // Declara a variável para armazenar o número decimal digitado
+
+    // Solicita que o usuário digite um número inteiro
+    printf("Digite um numero decimal: ");
+    scanf("%d", &n); // Lê o valor digitado e armazena em n
+
+    // Verifica se o número é negativo
+    if (n < 0)
+    {
+        printf("Por favor, digite um numero inteiro nao negativo.\n"); // Mensagem de erro
+        return 0; // Encerra o programa se o valor for inválido
+    }
+
+    // Exibe mensagem antes da conversão
+    printf("\nO numero %d em binario eh: ", n);
+
+    // Chama a função recursiva para exibir o número binário
+    decimalParaBinario(n);
+
+    printf("\n"); // Pula uma linha ao final da saída
+
+    system("pause");
+    return 0; // Encerra o programa com sucesso
+}
+
+// Função recursiva que imprime o número binário correspondente a n
+void decimalParaBinario(int N)
+{
+    // Caso base: quando n é menor que 2 (ou seja, 0 ou 1)
+    if (N < 2)
+    {
+        printf("%d", N); // Imprime diretamente o bit (0 ou 1)
+    }
+    else
+    {
+        // Chamada recursiva: divide o número por 2 e chama a função novamente
+        decimalParaBinario(N / 2);
+
+        // Após retornar da recursão, imprime o resto da divisão (bit menos significativo)
+        printf("%d", N % 2);
+    }
+}
