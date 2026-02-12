@@ -1,0 +1,113 @@
+/*
+31. Uma palavra de Fibonacci é definida por:
+
+    f(n) = "b" se n = 0
+    f(n) = "a" se n = 1
+    f(n) = f(n - 1) + f(n - 2) se n > 1
+
+    Aqui o símbolo “+” representa a concatenação de strings.
+    Esta sequência inicia com as palavras:
+    b, a, ab, aba, abaab, abaababa, abaababaabaab, ...
+
+    Faça uma função recursiva que receba um número N e retorne
+    a N-ésima palavra de Fibonacci.
+
+    Vamos montar passo a passo:
+
+    para n = 0
+
+    f(0) = b
+
+
+    para n = 1
+
+    f(1) = a
+
+
+    para n = 2
+
+    f(2) = f(1) + f(0) = a + b = ab
+
+
+    para n = 3
+
+    f(3) = f(2) + f(1) = ab + a = aba
+
+                   .
+                   .
+                   .
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 1000   // Tamanho máximo da palavra
+
+
+
+// ------------------------------------------------------------------
+// Protótipo da função recursiva
+// ------------------------------------------------------------------
+void fibonacciPalavra(int N, char RESULTADO[]);
+
+// ------------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------------
+int main()
+{
+    int n;
+    char palavra[MAX];
+
+    printf("Digite o valor de n (n >= 0): ");
+    scanf("%d", &n);
+
+    if (n < 0)
+    {
+        printf("Valor invalido.\n");
+        return 0;
+    }
+
+    fibonacciPalavra(n, palavra);
+
+    printf("\nA palavra de Fibonacci f(%d) eh: %s\n", n, palavra);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------------
+// Função recursiva que constrói a palavra de Fibonacci
+// A string resultado é passada como vetor (sem ponteiros explícitos)
+// ------------------------------------------------------------------
+
+// strcpy(destino, origem);
+
+void fibonacciPalavra(int N, char RESULTADO[])
+{
+    // Caso base 1
+    if (N == 0)
+    {
+        strcpy(RESULTADO, "b");  // strcpy(destino, origem);  // Copie a string "b" para dentro do vetor RESULTADO
+        return;                  // interrompe a função // não uso return b; , pois a função é void e não retorna valor
+    }
+
+    // Caso base 2
+    if (N == 1)
+    {
+        strcpy(RESULTADO, "a");  // Copie a string "a" para dentro do vetor RESULTADO
+        return;                  // interrompe a função
+    }
+
+    // Vetores auxiliares para guardar f(n-1) e f(n-2)
+    char f1[MAX];
+    char f2[MAX];
+
+    // Chamada recursiva
+    fibonacciPalavra(N - 1, f1);
+    fibonacciPalavra(N - 2, f2);
+
+    // Concatenação
+    strcpy(RESULTADO, f1);
+    strcat(RESULTADO, f2);
+}
