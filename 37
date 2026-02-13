@@ -1,0 +1,83 @@
+/*
+37. Escreva uma função recursiva que permita fazer a multiplicação à russa de 2 entradas.
+
+A multiplicação à russa consiste em:
+
+(a) Escrever os números A e B, que se deseja multiplicar, na parte superior das colunas.
+(b) Dividir A por 2 sucessivamente (ignorando o resto) até chegar a 1, escrevendo os resultados.
+(c) Multiplicar B por 2 tantas vezes quanto se dividiu A por 2, escrevendo os resultados.
+(d) Somar todos os números da coluna B que estejam ao lado de um número ímpar da coluna A.
+
+Exemplo:
+27 * 82
+
+ A   |   B   |  Soma Parcial
+-----------------------------
+ 27  |   82  |  +82
+ 13  |  164  |  +164
+  6  |  328  |   -
+  3  |  656  |  +656
+  1  | 1312  | +1312
+
+Resultado final: 2214
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+int multiplicacaoRussa(int a, int b);
+
+// Função principal (main)
+int main()
+{
+    int A; // Variável para armazenar o primeiro número
+    int B; // Variável para armazenar o segundo número
+    int resultado; // Variável para guardar o resultado final
+
+    // Solicita ao usuário que digite os dois números a multiplicar
+    printf("Digite o primeiro numero (A): ");
+    scanf("%d", &A); // Lê o valor de A
+
+    printf("Digite o segundo numero (B): ");
+    scanf("%d", &B); // Lê o valor de B
+
+    // Verifica se os números são positivos
+    if (A <= 0 || B <= 0)
+    {
+        printf("\nPor favor, insira apenas numeros inteiros positivos.\n"); // Mensagem de erro
+        return 0; // Encerra o programa
+    }
+
+    // Chama a função recursiva e armazena o resultado
+    resultado = multiplicacaoRussa(A, B); // Executa o método de multiplicação russa
+
+    // Exibe o resultado final
+    printf("\nO resultado da multiplicacao russa de %d * %d eh: %d\n", A, B, resultado);
+
+    system("pause");
+    return 0;
+}
+
+// Função recursiva que realiza a multiplicação russa
+int multiplicacaoRussa(int a, int b)
+{
+    // Caso base: quando A chega a 1, a multiplicação termina
+    if (a == 1)
+    {
+        return b; // Retorna o valor atual de B (última linha da tabela)
+    }
+
+    // Se A for ímpar, o valor de B será somado ao resultado
+    if (a % 2 != 0)
+    {
+        // Soma o valor de B e continua o processo com A dividido por 2 e B dobrado
+        return b + multiplicacaoRussa(a / 2, b * 2);
+    }
+    else
+    {
+        // Se A for par, ignora o valor de B e apenas continua o processo
+        return multiplicacaoRussa(a / 2, b * 2);
+    }
+}
