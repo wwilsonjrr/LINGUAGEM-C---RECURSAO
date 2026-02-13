@@ -1,0 +1,104 @@
+/*
+34. Faça uma função recursiva que permita inverter um número inteiro N.
+    Exemplo: 123 → 321
+
+
+    Teste de Mesa:
+
+    1ª chamada → n = 123
+
+    numDigitos = log10(123) → 2 (0,1,2)
+
+    ultimo = 123 % 10 → 3
+
+    resto = 123 / 10 → 12
+
+    (3 * 10²) + inverterNumero(12)
+
+    = 3 * 100 + inverterNumero(12)
+
+    = 300 + inverterNumero(12)
+
+
+
+    2ª chamada → n = 12
+
+    numDigitos = log10(12) → 1 (0, 1)
+
+    ultimo = 12 % 10 → 2
+
+    resto = 12 / 10 → 1
+
+    (2 * 10¹) + inverterNumero(1)
+
+    = 2 * 10 + inverterNumero(1)
+
+    = 20 + inverterNumero(1)
+
+
+
+    3ª chamada → n = 1
+
+    if (n < 10)
+    return n;
+
+    inverterNumero(1) = 1
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+#include <math.h>    // Biblioteca para funções matemáticas (pow, log10)
+
+// Protótipo da função recursiva
+int inverterNumero(int n);
+
+// Função principal (main)
+int main()
+{
+    int N; // Declara variável para armazenar o número inteiro digitado
+
+    // Solicita que o usuário digite um número inteiro
+    printf("Digite um numero inteiro: ");
+    scanf("%d", &N); // Lê o valor digitado pelo usuário
+
+    // Verifica se o número é negativo
+    if (N < 0)
+    {
+        // Exibe mensagem e converte o número para positivo antes de inverter
+        printf("\nNumero negativo detectado. Convertendo para positivo.\n");
+        N = -N; // Transforma em número positivo
+    }
+
+    // Chama a função recursiva e armazena o resultado invertido
+    int invertido = inverterNumero(N); // Exemplo: inverterNumero(123) → 321
+
+    // Exibe o número original e o número invertido
+    printf("\nNumero original: %d", N); // Mostra o número original
+    printf("\nNumero invertido: %d\n", invertido); // Mostra o número invertido
+
+    system("pause");
+    return 0;
+}
+
+// Função auxiliar recursiva que inverte o número
+int inverterNumero(int n)
+{
+    // Caso base: se o número for menor que 10 (apenas um dígito)
+    if (n < 10)
+    {
+        return n; // Retorna o próprio número (não há o que inverter)
+    }
+
+    // Calcula o número de dígitos em n usando logaritmo
+    int numDigitos = (int)log10(n); // Exemplo: log10(123) = 2 → 3 dígitos (0,1,2)
+
+    // Obtém o último dígito do número
+    int ultimo = n % 10; // Exemplo: 123 % 10 = 3
+
+    // Remove o último dígito de n (resta o número sem ele)
+    int resto = n / 10; // Exemplo: 123 / 10 = 12
+
+    // Retorna o último dígito multiplicado por 10 elevado à potência adequada
+    // e soma com a chamada recursiva para o restante do número
+    return (ultimo * pow(10, numDigitos)) + inverterNumero(resto);
+}
