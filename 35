@@ -1,0 +1,69 @@
+/*
+35. Escreva uma função recursiva que determine quantas vezes um dígito K
+    ocorre em um número natural N.
+    Por exemplo, o dígito 2 ocorre 3 vezes em 762021192.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+int contarDigito(int n, int k);
+
+// Função principal (main)
+int main()
+{
+    int N; // Variável que armazenará o número digitado pelo usuário
+    int K; // Variável que armazenará o dígito a ser procurado
+    int resultado; // Variável que guardará o total de ocorrências
+
+    // Solicita ao usuário que digite o número natural N
+    printf("Digite um numero natural: ");
+    scanf("%d", &N); // Lê o valor digitado e armazena em n
+
+    // Solicita o dígito K que se deseja contar
+    printf("Digite o digito que deseja contar (0 a 9): ");
+    scanf("%d", &K); // Lê o valor de k
+
+    // Verifica se o número é negativo e corrige, caso seja
+    if (N < 0)
+    {
+        printf("\nNumero negativo detectado. Convertendo para positivo.\n");
+        N = -N; // Transforma n em número positivo
+    }
+
+    // Chama a função recursiva e armazena o resultado
+    resultado = contarDigito(N, K); // Exemplo: contarDigito(762021192, 2)
+
+    // Exibe o resultado final
+    printf("\nO digito %d ocorre %d vez(es) no numero %d.\n", K, resultado, N);
+
+    system("pause");
+    return 0;
+}
+
+// Função recursiva que conta quantas vezes o dígito k aparece no número n
+int contarDigito(int n, int k)
+{
+    // Caso base: quando o número chega a 0 (não há mais dígitos a analisar)
+    if (n == 0)
+    {
+        return 0; // Retorna 0, pois não há mais dígitos a verificar
+    }
+
+    // Obtém o último dígito do número
+    int ultimo = n % 10; // Exemplo: 762021192 % 10 = 2
+
+    // Verifica se o último dígito é igual ao dígito procurado
+    if (ultimo == k)
+    {
+        // Se for igual, soma 1 e continua a busca no restante do número
+        return 1 + contarDigito(n / 10, k); // Chamada recursiva removendo o último dígito
+    }
+    else
+    {
+        // Se for diferente, apenas continua a busca sem somar
+        return contarDigito(n / 10, k); // Chamada recursiva com o número reduzido
+    }
+}
