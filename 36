@@ -1,0 +1,63 @@
+/*
+36. O máximo divisor comum dos inteiros x e y é o maior inteiro que é divisível por x e y.
+    Escreva uma função recursiva mdc que retorna o máximo divisor comum de x e y.
+
+    O mdc de x e y é definido como segue:
+    - Se y é igual a 0, então mdc(x, y) = x.
+    - Caso contrário, mdc(x, y) = mdc(y, x % y),
+      onde % é o operador resto.
+*/
+
+#include <stdio.h>  // Inclui a biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+
+// Protótipo da função recursiva
+int mdc(int x, int y);
+
+// Função principal (main)
+int main()
+{
+    int X; // Declara variável para armazenar o primeiro número
+    int Y; // Declara variável para armazenar o segundo número
+    int resultado; // Variável para guardar o resultado do MDC
+
+    // Solicita ao usuário o primeiro número inteiro
+    printf("Digite o primeiro numero inteiro: ");
+    scanf("%d", &X); // Lê o valor digitado e armazena em x
+
+    // Solicita ao usuário o segundo número inteiro
+    printf("Digite o segundo numero inteiro: ");
+    scanf("%d", &Y); // Lê o valor digitado e armazena em y
+
+    // Verifica se ambos os números são não nulos
+    if (X == 0 && Y == 0)
+    {
+        // O MDC não está definido quando ambos os números são 0
+        printf("\nNao existe MDC para 0 e 0.\n");
+        return 0; // Encerra o programa
+    }
+
+    // Chama a função recursiva para calcular o MDC
+    resultado = mdc(X, Y); // Exemplo: mdc(36, 24)
+
+    // Exibe o resultado final
+    printf("\nO MDC entre %d e %d eh: %d\n", X, Y, resultado);
+
+    system("pause");
+    return 0;
+}
+
+// Função recursiva que calcula o máximo divisor comum (MDC) entre dois números inteiros
+int mdc(int x, int y)
+{
+    // Caso base: quando o segundo número (y) for 0
+    if (y == 0)
+    {
+        return x; // Retorna x, pois o MDC foi encontrado
+    }
+
+    // Caso recursivo: chama a função novamente trocando os papéis de x e y
+    // e substitui x por y e y por x % y (resto da divisão)
+    return mdc(y, x % y); // Continua até que o resto seja 0
+}
